@@ -170,6 +170,12 @@ function processSkin(base64, option) {
         if (option.textureSideArm == "left") {
         }
 
+        // 腕を太くする
+        // todo: オプションを生やす
+        if (true) {
+          modifyArm3pxTo4px(ctx, option);
+        }
+
         // 腕のtop面反転
         if (option.useFlipArmTop) {
           flipArmTop(ctx, option);
