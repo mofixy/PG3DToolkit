@@ -92,7 +92,6 @@ function layerOverlay(ctx, option) {
     pasteOpaquePixels(ctx, 32, 0, 0, 0, 32, 16);
   }
   if (!option.skipSeccondLayerOverLayBody) {
-    pasteOpaquePixels(ctx, 32, 0, 0, 0, 32, 16);
     // 胴体
     pasteOpaquePixels(ctx, 16, 32, 16, 16, 24, 16);
   }
