@@ -9,14 +9,6 @@ function getImageBase64(image) {
   });
 }
 
-// snowflakeIDの生成
-// まともに生成はめんどくさいのでlong値からデクリメント
-function generateSnowflakeId(current_id) {
-  const id = current_id;
-  current_id -= 1n;
-  return id.toString();
-}
-
 //object -> string -> utf-8 -> hex
 function objToHexArray(skinmap) {
   const encoder = new TextEncoder();
@@ -80,8 +72,8 @@ function getOptions() {
   };
 }
 
-// メイン処理
-document.getElementById("btn").onclick = async () => {
+// .regファイル生成
+document.getElementById("btn_generate").onclick = async () => {
   const input_image = document.getElementById("imgInput");
   const file_datas = input_image.files;
   const skinmap = {};
@@ -90,12 +82,21 @@ document.getElementById("btn").onclick = async () => {
 
   // 画像とsnowflakeIDを生成、紐づけ
   for (let data of file_datas) {
+    // 画像のbase64化
     const raw_base64 = await getImageBase64(data);
 
     // 画像加工処理を通す
     // todo: スキンサイズが64x64だとまずいのでどうにかする。
     const modify_base64 = await processSkin(raw_base64, option);
-    const id = generateSnowflakeId(current_id);
+    console.log(`in:${current_id}`);
+
+    // snowflakeIDの生成
+    const id = current_id;
+    current_id -= 1n;
+    id.toString();
+
+    // ペアにする
+    console.log(`out:${current_id}`);
     skinmap[id] = modify_base64;
   }
 
@@ -104,4 +105,34 @@ document.getElementById("btn").onclick = async () => {
 
   // .regに詰めて出力
   createRegistoryFile(skinmap_hex_array);
+};
+
+// プレビュー生成
+document.getElementById("btn_preview").onclick = async () => {
+  const input_image = document.getElementById("imgInput");
+  const first_image = input_image.files[0];
+  const option = getOptions();
+  let current_id = 9223372036854775807n;
+
+  // base64を取得
+  const raw_base64 = await getImageBase64(first_image);
+
+  // 画像加工処理を通す
+  // todo: スキンサイズが64x64だとまずいのでどうにかする。
+  const modify_base64 = await processSkin(raw_base64, option);
+
+  // html上で表示する、テスト用 ///
+  const preview = document.getElementById("preview");
+  const pctx = preview.getContext("2d");
+  // 補完（スムージング）をOFF
+  pctx.imageSmoothingEnabled = false;
+
+  const img = new Image();
+  img.src = "data:image/png;base64," + modify_base64;
+
+  img.onload = () => {
+    pctx.clearRect(0, 0, preview.width, preview.height);
+    pctx.drawImage(img, 0, 0, preview.width, preview.height);
+  };
+  ///////////////////////////////
 };

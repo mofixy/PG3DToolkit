@@ -11,7 +11,7 @@
   <body>
     <input type="file" id="imgInput" accept="image/*" multiple />
     <br />
-    <button id="btn">生成</button>
+    <button id="btn_generate">生成</button>
     <br />
 
     <image_process>
@@ -78,5 +78,15 @@
         <option value="left">左足</option>
       </select>
     </image_process>
+    <br />
+    <button id="btn_preview">preview</button>
+    <br />
+    <style>
+      /* 補完を消すためには指定しなきゃいけないらしい*/
+      canvas {
+        image-rendering: pixelated;
+      }
+    </style>
+    <canvas id="preview" width="512" height="256"></canvas>
   </body>
 </html>
