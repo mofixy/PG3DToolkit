@@ -86,7 +86,7 @@ document.getElementById("btn_generate").onclick = async () => {
     const raw_base64 = await getImageBase64(data);
 
     // 画像加工処理を通す
-    // todo: スキンサイズが64x64だとまずいのでどうにかする。
+    // TODO: スキンサイズが64x64だとまずいのでどうにかする。
     const modify_base64 = await processSkin(raw_base64, option);
     console.log(`in:${current_id}`);
 
@@ -118,7 +118,7 @@ document.getElementById("btn_preview").onclick = async () => {
   const raw_base64 = await getImageBase64(first_image);
 
   // 画像加工処理を通す
-  // todo: スキンサイズが64x64だとまずいのでどうにかする。
+  // TODO: スキンサイズが64x64だとまずいのでどうにかする。
   const modify_base64 = await processSkin(raw_base64, option);
 
   // html上で表示する、テスト用 ///

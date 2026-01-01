@@ -79,7 +79,7 @@ function trimmingCanvas(canvas) {
 function clearEyelineLayer(ctx, option) {
   // アイラインが上書きされるとあんまり良い見た目にならないので
   // アイラインがある一部のレイヤー側ドットを削除
-  // todo: 消し方を複数パターン用意したい。向いている/向いていないスキンがあるだろうし。
+  // TODO: 消し方を複数パターン用意したい。向いている/向いていないスキンがあるだろうし。
   clearPixel(ctx, 40, 13);
   clearPixel(ctx, 41, 12);
   clearPixel(ctx, 46, 12);
@@ -102,7 +102,7 @@ function layerOverlay(ctx, option) {
       pasteOpaquePixels(ctx, 40, 32, 40, 16, 14, 16);
     } else {
       // 左腕
-      // todo: UV違うからめんどい
+      // TODO: UV違うからめんどい
     }
   }
   if (!option.skipSeccondLayerOverLayLeg) {
@@ -111,7 +111,7 @@ function layerOverlay(ctx, option) {
       pasteOpaquePixels(ctx, 0, 32, 0, 16, 16, 16);
     } else {
       // 左足
-      // todo: UV違うからめんどい
+      // TODO: UV違うからめんどい
     }
   }
 }
@@ -131,7 +131,7 @@ function modifyArm3pxTo4px(ctx, option) {
 }
 // 腕のtop面の反転
 function flipArmTop(ctx, option) {
-  // todo: 左腕を使うときはオプションを反転しないと...
+  // TODO: 左腕を使うときはオプションを反転しないと...
   pasteOpaquePixelsFlipX(ctx, 44, 16, 44, 16, 4, 4);
 }
 ///////////////////////////
@@ -165,12 +165,12 @@ function processSkin(base64, option) {
         }
 
         // 腕、足のテクスチャスワップ
-        // todo: 実装めんどそう！一旦無視
+        // TODO: 実装めんどそう！一旦無視
         if (option.textureSideArm == "left") {
         }
 
         // 腕を太くする
-        // todo: オプションを生やす
+        // TODO: オプションを生やす
         if (true) {
           modifyArm3pxTo4px(ctx, option);
         }
