@@ -11,8 +11,7 @@ function getImageBase64(image) {
 
 // snowflakeIDの生成
 // まともに生成はめんどくさいのでlong値からデクリメント
-let current_id = 9223372036854775807n;
-function generateSnowflakeId() {
+function generateSnowflakeId(current_id) {
   const id = current_id;
   current_id -= 1n;
   return id.toString();
@@ -87,6 +86,7 @@ document.getElementById("btn").onclick = async () => {
   const file_datas = input_image.files;
   const skinmap = {};
   const option = getOptions();
+  let current_id = 9223372036854775807n;
 
   // 画像とsnowflakeIDを生成、紐づけ
   for (let data of file_datas) {
@@ -95,7 +95,7 @@ document.getElementById("btn").onclick = async () => {
     // 画像加工処理を通す
     // todo: スキンサイズが64x64だとまずいのでどうにかする。
     const modify_base64 = await processSkin(raw_base64, option);
-    const id = generateSnowflakeId();
+    const id = generateSnowflakeId(current_id);
     skinmap[id] = modify_base64;
   }
 
